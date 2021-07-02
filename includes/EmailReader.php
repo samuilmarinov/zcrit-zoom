@@ -10,9 +10,9 @@ class EmailReader {
 	private $msg_cnt;
 
 	// email login credentials
-	private $server = 'samuilmarinov.co.uk';
-	private $user   =  'ronaldjones@samuilmarinov.co.uk';
-	private $pass   = '#}o11@5fcP1|';
+	private $server = 'DOMAIN';
+	private $user   =  'EMAIL';
+	private $pass   = 'DEFAULTPASS';
 	private $port   = 993; // adjust according to server settings
 
 	// connect to the server and get the inbox emails
@@ -33,7 +33,9 @@ class EmailReader {
 	// the imap_open function parameters will need to be changed for the particular server
 	// these are laid out to connect to a Dreamhost IMAP server
 	function connect() {
-		$this->conn = imap_open('{'.$this->server.'/notls}', $this->user, $this->pass);
+        $current_user = wp_get_current_user();
+        $theemail = $current_user->user_email;
+		$this->conn = imap_open('{'.$this->server.'/notls}', $theemail, $this->pass);
 	}
 
 	// move the message to a new folder
