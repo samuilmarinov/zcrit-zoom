@@ -130,6 +130,7 @@ function run_zcrit_zoom()
         $current_user = wp_get_current_user();
         $current_user_id = $current_user->ID;
         add_user_meta( $current_user_id, 'ZOOM_ACTIVE', '1', true);
+        include plugin_dir_path(__FILE__) . 'includes/mail-operator.php';
     //  $zcritzoomuser += 10;
     //  echo $zcritzoomuser;
       die(); 

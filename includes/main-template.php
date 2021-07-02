@@ -11,8 +11,10 @@ if ( is_user_logged_in() AND $havemeta ) {
     echo "<span id='button_zoom' class='button_zoom postvariables'>Host Meeting</span>";
     echo "<span style='display:none;' id='button_zoom2' class='button_zoom postvariables'>Host Meeting</span>";
 }else{
+    echo '<script type="module" src="https://unpkg.com/x-frame-bypass"></script>';
     echo "<span class='paragraph_zoom'>Activate your zoom account with Zcrit to use this feature. </br> Please hit the 'Activate Zoom' button to rpoceed.</span>";
     echo "<span id='button_user' class='button_zoom'>Activate Zoom</span>";
+    echo '<div id="loader" class="loader"></div>';
 }
 echo '</div>';
 ?>
@@ -42,10 +44,16 @@ jQuery(function( $ ) {
             action: 'zcrit_zoom_user_action',
             zcritzoomuser: ''
         };
+        document.getElementById("loader").style.display = "block";
         jQuery.post(ajaxurl, data, function(response) {
           //alert('response from the server: ' + response);
-          location.reload();
-            
+          var urlopen = response;
+		 // $('#loader').hide();
+		  $('<iframe id="iframe_hk" is="x-frame-bypass" src="'+urlopen+'" style="opacity:0; border:0px #ffffff none;" name="myiFrame" scrolling="no" frameborder="1" marginheight="0px" marginwidth="0px" height="50px" width="50px" allowfullscreen></iframe>').insertAfter("#content");
+		  // window.open(urlopen, '_blank'); 
+          setTimeout(function () {
+           location.reload(); 
+          }, 10000);  
         });
     });
 });

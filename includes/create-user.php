@@ -4,21 +4,25 @@ require_once plugin_dir_path(__FILE__) . '/jwt/ExpiredException.php';
 require_once plugin_dir_path(__FILE__) . '/jwt/SignatureInvalidException.php';
 require_once plugin_dir_path(__FILE__) . '/jwt/JWT.php';
 
+
 use \Firebase\JWT\JWT;
 
 class Zoom_Api
 {
     protected function createUser()
     {       
+
         $current_user = wp_get_current_user();
         $request_user_variable = $current_user->user_email;
+        $user_firstname = $current_user->user_firstname;
+        $user_lastname = $current_user->user_lastname;
         $current_url = "https://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 		$request_url = 'https://api.zoom.us/v2/users/';
 		            $headers = array(
 		        "authorization: Bearer ".$this->generateJWTKey(),
 		        'content-type: application/json'
 		);
-      	$data = '{"action":"create","user_info":{"email":"'.$request_user_variable.'","type":1,"first_name":"Sam","last_name":"Test"}}';
+      	$data = '{"action":"create","user_info":{"email":"'.$request_user_variable.'","type":1,"first_name":"'.$user_firstname.'","last_name":"'.$user_lastname.'"}}';
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -56,8 +60,8 @@ class Zoom_Api
 }
 $zoom_user = new Zoom_Api();
 try {
-      $z = $zoom_user->createAUser();
-     print_r($z);
+     $z = $zoom_user->createAUser();
+    // print_r($z);
 } catch (Exception $ex) {
       echo $ex;
 }
