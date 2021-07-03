@@ -22,6 +22,7 @@ require_once plugin_dir_path(__FILE__) . '/EmailReader.php';
                 $subject = $message['header']->subject;
                 if($activation_link != '' && $subject == 'Zoom account invitation'){
                     print_r($activation_link);
+                    sleep(3);
                     $email->delete($msg_index);
                     break; 
                 }          
