@@ -2,17 +2,19 @@
 $current_user = wp_get_current_user();
 $userID = $current_user->ID; 
 $havemeta = get_user_meta($userID, 'ZOOM_ACTIVE', true);
+//ZCRIT-ZOOM OPTIONS
+$options = get_option('Zcrit_Zoom_options');
+$z_meetings_url = $options['meetings_url'];
+$z_sdk = $options['sdk_build']; 
 echo '<div class="meetings_zoom">';
 if ( is_user_logged_in() AND $havemeta ) {
-    //ZCRIT-ZOOM OPTIONS
-    $options = get_option('Zcrit_Zoom_options');
-    $z_meetings_url = $options['meetings_url'];
-    $z_sdk = $options['sdk_build']; 
     echo "<span id='button_zoom' class='button_zoom postvariables'>Host Meeting</span>";
     echo "<span style='display:none;' id='button_zoom2' class='button_zoom postvariables'>Host Meeting</span>";
 }else{
     echo '<script type="module" src="https://unpkg.com/x-frame-bypass"></script>';
-    echo "<span class='paragraph_zoom'>Activate your zoom account with Zcrit to use this feature. </br> Please hit the 'Activate Zoom' button to rpoceed.</span>";
+    echo "<span style='display:none;' id='button_zoom' class='button_zoom postvariables'>Host Meeting</span>";
+    echo "<span style='display:none;' id='button_zoom2' class='button_zoom postvariables'>Host Meeting</span>";
+    echo "<span id='paragraph_zoom_activate' class='paragraph_zoom'>Activate your zoom account with Zcrit to use this feature. </br> Please hit the 'Activate Zoom' button to rpoceed.</span>";
     echo "<span id='button_user' class='button_zoom'>Activate Zoom</span>";
     echo '<div id="loader" class="loader"></div>';
 }
@@ -52,7 +54,12 @@ jQuery(function( $ ) {
 		  $('<iframe id="iframe_hk" is="x-frame-bypass" src="'+urlopen+'" style="opacity:0; border:0px #ffffff none;" name="myiFrame" scrolling="no" frameborder="1" marginheight="0px" marginwidth="0px" height="50px" width="50px" allowfullscreen></iframe>').insertAfter("#content");
 		  // window.open(urlopen, '_blank'); 
           setTimeout(function () {
-            location.reload(); 
+             //location.reload();        
+             $('#button_zoom').show();
+             $('#loader').hide();
+             $('#paragraph_zoom_activate').hide();
+             $('#button_user').hide(); 
+             $('#iframe_hk').remove();  
           }, 10000);  
         });
     });
