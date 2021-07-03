@@ -43,7 +43,15 @@ class EmailReader {
 		// move on server
 		imap_mail_move($this->conn, $msg_index, $folder);
 		imap_expunge($this->conn);
+		// re-read the inbox
+		$this->inbox();
+	}
 
+	// delete
+	function delete($msg_index) {
+		// delete from server
+		imap_delete($this->conn, $msg_index);
+		imap_expunge($this->conn);
 		// re-read the inbox
 		$this->inbox();
 	}
