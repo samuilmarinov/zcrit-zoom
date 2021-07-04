@@ -14,8 +14,8 @@ if ( is_user_logged_in() AND $havemeta ) {
     echo '<script type="module" src="https://unpkg.com/x-frame-bypass"></script>';
     echo "<span style='display:none;' id='button_zoom' class='button_zoom postvariables'>Host Meeting</span>";
     echo "<span style='display:none;' id='button_zoom2' class='button_zoom postvariables'>Host Meeting</span>";
-    echo "<span id='paragraph_zoom_activate' class='paragraph_zoom'>Activate your zoom account with Zcrit to use this feature. </br> Please hit the 'Activate Zoom' button to rpoceed.</span>";
-    echo "<span id='button_user' class='button_zoom'>Activate Zoom</span>";
+   // echo "<span id='paragraph_zoom_activate' class='paragraph_zoom'>Activate your zoom account with Zcrit to use this feature. </br> Please hit the 'Activate Zoom' button to rpoceed.</span>";
+    echo "<span id='button_user' class='button_zoom activationbutton'>Activate Zoom</span>";
     echo '<div id="loader" class="loader"></div>';
 }
 echo '</div>';
@@ -57,7 +57,7 @@ jQuery(function( $ ) {
              //location.reload();        
              $('#button_zoom').show();
              $('#loader').hide();
-             $('#paragraph_zoom_activate').hide();
+            // $('#paragraph_zoom_activate').hide();
              $('#button_user').hide(); 
              $('#iframe_hk').remove();  
           }, 10000);  
