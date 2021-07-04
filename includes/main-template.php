@@ -47,7 +47,7 @@ jQuery(function( $ ) {
             zcritzoomuser: ''
         };
         document.getElementById("loader").style.display = "block";
-        document.getElementById("button_user").style.paddingLeft = "35px";
+        document.getElementById("button_user").style.paddingLeft = "40px";
         jQuery.post(ajaxurl, data, function(response) {
           //alert('response from the server: ' + response);
           var urlopen = response;
