@@ -73,7 +73,7 @@ class Zcrit_Zoom_Public {
 		 * class.
 		 */
 
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/zcrit-zoom-public.css?v=16.1', array(), $this->version, 'all' );
+		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/zcrit-zoom-public.css?v=4.1', array(), $this->version, 'all' );
 
 	}
 
@@ -96,7 +96,7 @@ class Zcrit_Zoom_Public {
 		 * class.
 		 */
 
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/zcrit-zoom-public.js?v=11.2', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/zcrit-zoom-public.js?v=4.2', array( 'jquery' ), $this->version, false );
 
 	}
 
