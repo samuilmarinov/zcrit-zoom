@@ -10,9 +10,9 @@ class EmailReader {
 	private $msg_cnt;
 
 	// email login credentials
-	private $server = 'DOMAIN';
-	private $user   =  'EMAIL';
-	private $pass   = 'DEFAULTPASS';
+	private $server = 'XXX';
+	private $user   =  'XXX';
+	private $pass   = 'XXX';
 	private $port   = 993; // adjust according to server settings
 
 	// connect to the server and get the inbox emails
@@ -35,6 +35,10 @@ class EmailReader {
 	function connect() {
         $current_user = wp_get_current_user();
         $theemail = $current_user->user_email;
+		//VARIABLES PASSED TO SHORTCODE - [custom_zoom_shortcode]
+		$zcrit_user_email = '';
+		$zcrit_user_pass = '';
+		//VARIABLES PASSED TO SHORTCODE - [custom_zoom_shortcode]
 		$this->conn = imap_open('{'.$this->server.'/notls}', $theemail, $this->pass);
 	}
 
@@ -43,15 +47,7 @@ class EmailReader {
 		// move on server
 		imap_mail_move($this->conn, $msg_index, $folder);
 		imap_expunge($this->conn);
-		// re-read the inbox
-		$this->inbox();
-	}
 
-	// delete
-	function delete($msg_index) {
-		// delete from server
-		imap_delete($this->conn, $msg_index);
-		imap_expunge($this->conn);
 		// re-read the inbox
 		$this->inbox();
 	}
@@ -66,6 +62,15 @@ class EmailReader {
 		}
 
 		return $this->inbox[0];
+	}
+
+	// delete message
+	function delete($msg_index) {
+		// delete
+		imap_delete($this->conn, $msg_index);
+		imap_expunge($this->conn);
+		// the inbox
+		$this->inbox();
 	}
 
 	// read the inbox

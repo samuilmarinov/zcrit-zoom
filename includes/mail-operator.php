@@ -7,7 +7,7 @@ require_once plugin_dir_path(__FILE__) . '/EmailReader.php';
             $hour_ago = strtotime('-5 minutes');
             $dateemail = $inboxemail['header']->udate;
             if($dateemail > $hour_ago ){
-                $msg_index = $inboxemail['index'];
+				$msg_index = $inboxemail['index'];
                 $message = $inboxemail;
                 $body = $message['body'];
                 $dom = new DomDocument();
@@ -22,8 +22,8 @@ require_once plugin_dir_path(__FILE__) . '/EmailReader.php';
                 $subject = $message['header']->subject;
                 if($activation_link != '' && $subject == 'Zoom account invitation'){
                     print_r($activation_link);
-                    sleep(3);
-                    $email->delete($msg_index);
+					sleep(3); 
+					$email->delete($msg_index);
                     break; 
                 }          
             }	
