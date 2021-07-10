@@ -16,6 +16,7 @@ if ( is_user_logged_in() AND $havemeta ) {
     echo "<span style='display:none;' id='button_zoom' class='button_zoom postvariables'><img src='data:image/image/png;base64,".$base_64_image."' alt='Zcrit-Zoom Call'/></span>";
     echo "<span style='display:none;' id='button_zoom2' class='button_zoom postvariables'><img src='data:image/image/png;base64,".$base_64_image."' alt='Zcrit-Zoom Call'/></span>";
  //   echo "<span id='paragraph_zoom_activate' class='paragraph_zoom'>Activate Zoom the first time you use it.</span>";
+    echo "<span style='display:none;' id='activation_fail' class='activation_fail'>Activation Error - try again!</span>";
     echo "<span id='button_user' class='button_zoom activationbutton'>Click to Activate Zoom<div id='loader' class='loader'></div></span>";
 }
 echo '</div>';
@@ -50,18 +51,22 @@ jQuery(function( $ ) {
         document.getElementById("button_user").style.paddingLeft = "40px";
         jQuery.post(ajaxurl, data, function(response) {
           //alert('response from the server: ' + response);
-          var urlopen = response;
-		 // $('#loader').hide();
-		  $('<iframe id="iframe_hk" is="x-frame-bypass" src="'+urlopen+'" style="opacity:0; border:0px #ffffff none;" name="myiFrame" scrolling="no" frameborder="1" marginheight="0px" marginwidth="0px" height="50px" width="50px" allowfullscreen></iframe>').insertAfter("#content");
-		  // window.open(urlopen, '_blank'); 
-          setTimeout(function () {
-             //location.reload();        
-             $('#button_zoom').show();
-             $('#loader').hide();
-          //   $('#paragraph_zoom_activate').hide();
-             $('#button_user').hide(); 
-             $('#iframe_hk').remove();               
-          }, 10000);  
+            if(response != 'FAIL'){
+              var urlopen = response;
+    		 // $('#loader').hide();
+    		  $('<iframe id="iframe_hk" is="x-frame-bypass" src="'+urlopen+'" style="opacity:0; border:0px #ffffff none;" name="myiFrame" scrolling="no" frameborder="1" marginheight="0px" marginwidth="0px" height="50px" width="50px" allowfullscreen></iframe>').insertAfter("#content");
+    		  // window.open(urlopen, '_blank'); 
+              setTimeout(function () {
+                 //location.reload();        
+                 $('#button_zoom').show();
+                 $('#loader').hide();
+              // $('#paragraph_zoom_activate').hide();
+                 $('#button_user').hide(); 
+                 $('#iframe_hk').remove();               
+              }, 10000);  
+            }else{
+              $('#activation_fail').show();
+            }
         });
     });
 });
@@ -123,7 +128,7 @@ jQuery(function( $ ) {
             $('</br><span>' + joinurl + '</span>').insertAfter('#button_zoom');
             document.getElementById("button_zoom").style.display = "none";
             document.getElementById("button_zoom2").style.display = "block";
-            document.getElementById("button_zoom2").innerHTML = '<a target="_blank" href='+hosturl+'><img src="data:image/image/png;base64,<?php echo $base_64_image; ?>" alt="Zcrit-Zoom Call"/></a>';
+            document.getElementById("button_zoom2").innerHTML = '<a target="_blank" href='+hosturl+'>Start Meeting</a>';
             window.open(hosturl, '_blank'); 
             window.open(hosturl, '_blank');      
         });

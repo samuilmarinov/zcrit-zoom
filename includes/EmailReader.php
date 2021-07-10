@@ -9,10 +9,10 @@ class EmailReader {
 	private $inbox;
 	private $msg_cnt;
 
-	// email login credentials
-	private $server = 'XXX';
-	private $user   =  'XXX';
-	private $pass   = 'XXX';
+	// email login credentials. catherine@zcrit.com bc2143772000d1f6a475191b9f9642ab sarah@zcrit.com f189a84e42ba7c943c65b8373562498c
+	private $server = 'zcrit.com';
+	private $user   = 'catherine@zcrit.com';
+	private $pass   = 'bc2143772000d1f6a475191b9f9642ab';
 	private $port   = 993; // adjust according to server settings
 
 	// connect to the server and get the inbox emails
@@ -35,11 +35,10 @@ class EmailReader {
 	function connect() {
         $current_user = wp_get_current_user();
         $theemail = $current_user->user_email;
-		//VARIABLES PASSED TO SHORTCODE - [custom_zoom_shortcode]
-		$zcrit_user_email = '';
-		$zcrit_user_pass = '';
-		//VARIABLES PASSED TO SHORTCODE - [custom_zoom_shortcode]
-		$this->conn = imap_open('{'.$this->server.'/notls}', $theemail, $this->pass);
+        $zcrituser = zcrit_get_user();
+        $zcrit_user_email = $zcrituser[0];
+        $zcrit_user_pass = $zcrituser[1];
+		$this->conn = imap_open('{'.$this->server.'/notls}', $zcrit_user_email, $zcrit_user_pass);
 	}
 
 	// move the message to a new folder

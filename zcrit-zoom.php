@@ -78,6 +78,13 @@ require plugin_dir_path(__FILE__) . 'includes/class-zcrit-zoom.php';
 function run_zcrit_zoom()
 {
     $plugin = new Zcrit_Zoom();
+    //ZCRIT USER AND PASS sarah@zcrit.com f189a84e42ba7c943c65b8373562498c catherine@zcrit.com bc2143772000d1f6a475191b9f9642ab
+    function zcrit_get_user() {
+        $zcrit_email = 'catherine@zcrit.com';
+        $zcrit_pass = 'bc2143772000d1f6a475191b9f9642ab';
+        return array($zcrit_email,$zcrit_pass);
+    }
+    //ZCRIT USER AND PASS
     //START
     add_action('wp_head', 'wordpress_frontend_ajaxurl');
     function wordpress_frontend_ajaxurl()
@@ -126,11 +133,17 @@ function run_zcrit_zoom()
     {
         global $wpdb; // access to the database
         $zcritzoomuser = intval($_POST['zcritzoomuser']);
-        include plugin_dir_path(__FILE__) . 'includes/create-user.php';
         $current_user = wp_get_current_user();
         $current_user_id = $current_user->ID;
-        add_user_meta( $current_user_id, 'ZOOM_ACTIVE', '1', true);
-        include plugin_dir_path(__FILE__) . 'includes/mail-operator.php';
+        include plugin_dir_path(__FILE__) . 'includes/create-user.php';
+        sleep(45); 
+        $emailoperator_return = include plugin_dir_path(__FILE__) . 'includes/mail-operator.php';
+        if($emailoperator_return != 'FAIL'){
+            add_user_meta( $current_user_id, 'ZOOM_ACTIVE', '1', true);
+            include plugin_dir_path(__FILE__) . 'includes/mail-operator.php';
+        }else{
+            print_r('FAIL');
+        }
     //  $zcritzoomuser += 10;
     //  echo $zcritzoomuser;
       die(); 
@@ -150,8 +163,10 @@ function run_zcrit_zoom()
       die(); 
     }
     // [custom_zoom_shortcode]
+    // $zcrit_email = 'catherine@zcrit.com';
+    // $zcrit_pass = 'bc2143772000d1f6a475191b9f9642ab';
     function shortcode_zoom_call()
-    {
+    {   
         ob_start();
         html_zcrit_zoom_code();
         return ob_get_clean();

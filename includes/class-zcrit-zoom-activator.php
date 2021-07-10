@@ -41,7 +41,7 @@ class Zcrit_Zoom_Activator {
 		. "\$password = \$_REQUEST['password'];\n"
 		. "\$host = \$_REQUEST['host'];\n"
 		. "\$current_user = wp_get_current_user();\n"
-		. "\$email = \$current_user->user_email;\n"
+        . "\$email = \$current_user->user_email;\n"
 		. "\$user = \$current_user->display_name;\n"
 		. "\$button = 'Join';\n"
 		. "if(\$host){\n"

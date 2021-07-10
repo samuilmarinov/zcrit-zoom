@@ -1,6 +1,6 @@
 <?php 
 require_once plugin_dir_path(__FILE__) . '/EmailReader.php';
-        sleep(45);  
+        // sleep(45);  
         $email = new EmailReader();
         $emailz = $email->inbox();
         foreach($emailz as $inboxemail){
@@ -25,7 +25,10 @@ require_once plugin_dir_path(__FILE__) . '/EmailReader.php';
 					sleep(3); 
 					$email->delete($msg_index);
                     break; 
-                }          
+                }else{
+                    print_r('FAIL');
+                    break;
+                }         
             }	
         }
       
