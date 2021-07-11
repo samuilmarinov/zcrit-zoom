@@ -100,7 +100,7 @@ jQuery(function( $ ) {
            // var email = settings[4];
             var email = '<?php echo $zommmail_ext ?>';
             var root = '<?php echo $z_meetings_url;?>?meeting='+ meeting +'&password='+ password +'&email='+ email +'&host=yes';
-            var join = '<?php echo $z_meetings_url;?>?meeting='+ meeting +'&password='+ password +'&atendee=yes';
+            var join = '<?php echo $z_meetings_url;?>?meeting='+ meeting +'&password='+ password +'&email='+ email +'&atendee=yes';
             $('</br><span>' + join + '</span>').insertAfter('#button_zoom');
             document.getElementById("button_zoom").style.display = "none";
             document.getElementById("button_zoom2").style.display = "block";
@@ -133,7 +133,7 @@ jQuery(function( $ ) {
             // var email = settings[4];
             var email = '<?php echo $zommmail_ext ?>';
             var root = '<?php echo $z_meetings_url;?>?meeting='+ meeting +'&password='+ password +'&email='+ email +'&host=yes';
-            var join = '<?php echo $z_meetings_url;?>?meeting='+ meeting +'&password='+ password +'&atendee=yes';
+            var join = '<?php echo $z_meetings_url;?>?meeting='+ meeting +'&password='+ password +'&email='+ email +'&atendee=yes';
             $('</br><span>' + joinurl + '</span>').insertAfter('#button_zoom');
             document.getElementById("button_zoom").style.display = "none";
             document.getElementById("button_zoom2").style.display = "block";
