@@ -9,10 +9,10 @@ class EmailReader {
 	private $inbox;
 	private $msg_cnt;
 
-	// email login credentials. catherine@zcrit.com bc2143772000d1f6a475191b9f9642ab sarah@zcrit.com f189a84e42ba7c943c65b8373562498c
+	// email login credentials
 	private $server = 'zcrit.com';
-	private $user   = 'catherine@zcrit.com';
-	private $pass   = 'bc2143772000d1f6a475191b9f9642ab';
+	private $user   = '';
+	private $pass   = '';
 	private $port   = 993; // adjust according to server settings
 
 	// connect to the server and get the inbox emails
@@ -33,11 +33,8 @@ class EmailReader {
 	// the imap_open function parameters will need to be changed for the particular server
 	// these are laid out to connect to a Dreamhost IMAP server
 	function connect() {
-        $current_user = wp_get_current_user();
-        $theemail = $current_user->user_email;
-        $zcrituser = zcrit_get_user();
-        $zcrit_user_email = $zcrituser[0];
-        $zcrit_user_pass = $zcrituser[1];
+        $zcrit_user_email = $zcritzoomuser;
+        $zcrit_user_pass = $zcritzoompass;
 		$this->conn = imap_open('{'.$this->server.'/notls}', $zcrit_user_email, $zcrit_user_pass);
 	}
 

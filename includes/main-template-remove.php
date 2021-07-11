@@ -13,7 +13,7 @@ jQuery(function( $ ) {
     $('#button_user_delete').on('click', function () {
         var data = {
             action: 'zcrit_zoom_user_delete_action',
-            zcritzoomuserdelete: ''
+            zcritzoomuserdelete: '<?php echo $zommmail_ext ?>'
         };
         jQuery.post(ajaxurl, data, function(response) {
           //alert('response from the server: ' + response);

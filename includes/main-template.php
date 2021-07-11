@@ -2,6 +2,8 @@
 $current_user = wp_get_current_user();
 $userID = $current_user->ID; 
 $havemeta = get_user_meta($userID, 'ZOOM_ACTIVE', true);
+// var_dump($zommmail_ext);
+// var_dump($zommpass_ext);
 $base_64_image = "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";
 //ZCRIT-ZOOM OPTIONS
 $options = get_option('Zcrit_Zoom_options');
@@ -11,6 +13,7 @@ echo '<div id="meetingstartid" class="meetings_zoom">';
 if ( is_user_logged_in() AND $havemeta ) {
     echo "<span id='button_zoom' class='button_zoom postvariables'><img src='data:image/image/png;base64,".$base_64_image."' alt='Zcrit-Zoom Call'/></span>";
     echo "<span style='display:none;' id='button_zoom2' class='button_zoom postvariables'><img src='data:image/image/png;base64,".$base_64_image."' alt='Zcrit-Zoom Call'/></span>";
+    echo "<span id='button_user_delete' class='button_zoom button_zoom_delete'>Deactivate Zoom</span>";
 }else{
     echo '<script type="module" src="https://unpkg.com/x-frame-bypass"></script>';
     echo "<span style='display:none;' id='button_zoom' class='button_zoom postvariables'><img src='data:image/image/png;base64,".$base_64_image."' alt='Zcrit-Zoom Call'/></span>";
@@ -18,6 +21,9 @@ if ( is_user_logged_in() AND $havemeta ) {
  //   echo "<span id='paragraph_zoom_activate' class='paragraph_zoom'>Activate Zoom the first time you use it.</span>";
     echo "<span style='display:none;' id='activation_fail' class='activation_fail'>Activation Error - try again!</span>";
     echo "<span id='button_user' class='button_zoom activationbutton'>Click to Activate Zoom<div id='loader' class='loader'></div></span>";
+    echo "<span style='color:black;'>".$zommmail_ext."<span>";
+    echo "<br>";
+    echo "<span style='color:black;'>".$zommpass_ext."<span>";
 }
 echo '</div>';
 ?>
@@ -28,7 +34,7 @@ jQuery(function( $ ) {
     $('#button_user_delete').on('click', function () {
         var data = {
             action: 'zcrit_zoom_user_delete_action',
-            zcritzoomuserdelete: ''
+            zcritzoomuserdelete: '<?php echo $zommmail_ext ?>'
         };
         jQuery.post(ajaxurl, data, function(response) {
           //alert('response from the server: ' + response);
@@ -45,7 +51,8 @@ jQuery(function( $ ) {
     $('#button_user').on('click', function () {
         var data = {
             action: 'zcrit_zoom_user_action',
-            zcritzoomuser: ''
+            zcritzoomuser: '<?php echo $zommmail_ext ?>',
+            zcritzoompass: '<?php echo $zommpass_ext ?>'
         };
         document.getElementById("loader").style.display = "block";
         document.getElementById("button_user").style.paddingLeft = "40px";
@@ -80,7 +87,7 @@ jQuery(function( $ ) {
     $('#button_zoom').on('click', function () {
         var data = {
             action: 'zcrit_zoom_action',
-            zcritzoom: ''
+            zcritzoom: '<?php echo $zommmail_ext ?>'
         };
         jQuery.post(ajaxurl, data, function(response) {
         //alert('response from the server: ' + response);
@@ -90,7 +97,8 @@ jQuery(function( $ ) {
             var joinurl = settings[1];
             var meeting = settings[2];
             var password = settings[3];
-            var email = settings[4];
+           // var email = settings[4];
+            var email = '<?php echo $zommmail_ext ?>';
             var root = '<?php echo $z_meetings_url;?>?meeting='+ meeting +'&password='+ password +'&email='+ email +'&host=yes';
             var join = '<?php echo $z_meetings_url;?>?meeting='+ meeting +'&password='+ password +'&atendee=yes';
             $('</br><span>' + join + '</span>').insertAfter('#button_zoom');
@@ -112,7 +120,7 @@ jQuery(function( $ ) {
     $('#button_zoom').on('click', function () {
         var data = {
             action: 'zcrit_zoom_action',
-            zcritzoom: ''
+            zcritzoom: '<?php echo $zommmail_ext ?>'
         };
         jQuery.post(ajaxurl, data, function(response) {
         //alert('response from the server: ' + response);
@@ -122,7 +130,8 @@ jQuery(function( $ ) {
             var joinurl = settings[1];
             var meeting = settings[2];
             var password = settings[3];
-            var email = settings[4];
+            // var email = settings[4];
+            var email = '<?php echo $zommmail_ext ?>';
             var root = '<?php echo $z_meetings_url;?>?meeting='+ meeting +'&password='+ password +'&email='+ email +'&host=yes';
             var join = '<?php echo $z_meetings_url;?>?meeting='+ meeting +'&password='+ password +'&atendee=yes';
             $('</br><span>' + joinurl + '</span>').insertAfter('#button_zoom');

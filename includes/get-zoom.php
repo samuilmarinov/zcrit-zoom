@@ -11,7 +11,8 @@ class Zoom_Api
     protected function sendRequest($data)
     {
         $current_user = wp_get_current_user();
-        $request_user_variable = $current_user->user_email;
+      //  $request_user_variable = $current_user->user_email;
+        $request_user_variable = $zcritzoom;
         $current_url = "https://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
         if ($request_user_variable) {
             $request_url = 'https://api.zoom.us/v2/users/'.$request_user_variable.'/meetings';
