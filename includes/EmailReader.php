@@ -9,7 +9,7 @@ class EmailReader {
 	private $inbox;
 	private $msg_cnt;
 
-	// email login credentials. catherine@zcrit.com bc2143772000d1f6a475191b9f9642ab sarah@zcrit.com f189a84e42ba7c943c65b8373562498c
+	// email login credentials
 	private $server = 'zcrit.com';
 	private $user   = '';
 	private $pass   = '';

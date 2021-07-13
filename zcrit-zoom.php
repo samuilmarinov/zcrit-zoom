@@ -78,13 +78,6 @@ require plugin_dir_path(__FILE__) . 'includes/class-zcrit-zoom.php';
 function run_zcrit_zoom()
 {
     $plugin = new Zcrit_Zoom();
-    //ZCRIT USER AND PASS sarah@zcrit.com f189a84e42ba7c943c65b8373562498c catherine@zcrit.com bc2143772000d1f6a475191b9f9642ab
-    function zcrit_get_user() {
-        $zcrit_email = 'catherine@zcrit.com';
-        $zcrit_pass = 'bc2143772000d1f6a475191b9f9642ab';
-        return array($zcrit_email,$zcrit_pass);
-    }
-    //ZCRIT USER AND PASS
     //START
     add_action('wp_head', 'wordpress_frontend_ajaxurl');
     function wordpress_frontend_ajaxurl()
