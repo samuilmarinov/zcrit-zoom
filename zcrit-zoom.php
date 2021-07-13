@@ -156,8 +156,6 @@ function run_zcrit_zoom()
       die(); 
     }
     // [custom_zoom_shortcode]
-    // $zcrit_email = 'catherine@zcrit.com';
-    // $zcrit_pass = 'bc2143772000d1f6a475191b9f9642ab';
     function shortcode_zoom_call($atts)
     {   
         $zommmail_ext = $atts['zoommail'];

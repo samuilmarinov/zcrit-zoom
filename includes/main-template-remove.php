@@ -2,11 +2,9 @@
 $current_user = wp_get_current_user();
 $userID = $current_user->ID; 
 $havemeta = get_user_meta($userID, 'ZOOM_ACTIVE', true);    
-
 if ( is_user_logged_in() AND $havemeta ) {
     echo "<span id='button_user_delete' class='button_zoom button_zoom_delete'>Deactivate Zoom</span>";
 }
-
 ?>
 <script>
 //AJAX CALL - DELETE USER
