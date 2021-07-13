@@ -13,8 +13,11 @@ class Zoom_Api
     {       
 
         $current_user = wp_get_current_user();
-        //$request_user_variable = $current_user->user_email;
-        $request_user_variable = $zcritzoomuser;
+        $userID = $current_user->ID;
+        $user_stored = get_user_meta($userID, 'zxzzoomactive_'.$userID.'_user');
+        $zcrit_user_email = $user_stored[0];
+        $request_user_variable = $zcrit_user_email;
+
         $user_firstname = $current_user->user_firstname;
         $user_lastname = $current_user->user_lastname;
         $current_url = "https://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";

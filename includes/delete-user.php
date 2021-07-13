@@ -11,8 +11,12 @@ class Zoom_Api
     protected function deleteUser()
     {
         $current_user = wp_get_current_user();
-        //$request_user_variable = $current_user->user_email;
-        $request_user_variable = $zcritzoomuserdelete;
+        $userID = $current_user->ID;
+        $user_stored = get_user_meta($userID, 'zxzzoomactive_'.$userID.'_user');
+        $zcrit_user_email = $user_stored[0];
+        $request_user_variable = $zcrit_user_email;
+
+
         $current_url = "https://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
         $request_url = 'https://api.zoom.us/v2/users/'.$request_user_variable.'/';
         $headers = array(

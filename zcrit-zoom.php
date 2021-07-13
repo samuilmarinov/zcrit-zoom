@@ -78,6 +78,13 @@ require plugin_dir_path(__FILE__) . 'includes/class-zcrit-zoom.php';
 function run_zcrit_zoom()
 {
     $plugin = new Zcrit_Zoom();
+    //ZCRIT USER AND PASS sarah@zcrit.com f189a84e42ba7c943c65b8373562498c catherine@zcrit.com bc2143772000d1f6a475191b9f9642ab
+    function zcrit_get_user() {
+        $zcrit_email = 'catherine@zcrit.com';
+        $zcrit_pass = 'bc2143772000d1f6a475191b9f9642ab';
+        return array($zcrit_email,$zcrit_pass);
+    }
+    //ZCRIT USER AND PASS
     //START
     add_action('wp_head', 'wordpress_frontend_ajaxurl');
     function wordpress_frontend_ajaxurl()
@@ -96,7 +103,7 @@ function run_zcrit_zoom()
     }
     add_action('plugin_action_links_' . plugin_basename(__FILE__), 'action_links');
     //Zoom Call Shortcode
-    function html_zcrit_zoom_code($zommmail_ext,$zommpass_ext)
+    function html_zcrit_zoom_code()
     {
         global $wp;
         global $wp_query;
@@ -126,8 +133,6 @@ function run_zcrit_zoom()
     {
         global $wpdb; // access to the database
         $zcritzoomuser = intval($_POST['zcritzoomuser']);
-        $zcritzoompass = intval($_POST['zcritzoompass']);
-        
         $current_user = wp_get_current_user();
         $current_user_id = $current_user->ID;
         include plugin_dir_path(__FILE__) . 'includes/create-user.php';
@@ -157,13 +162,18 @@ function run_zcrit_zoom()
     //  echo $zcritzoomuser;
       die(); 
     }
-
     // [custom_zoom_shortcode]
+    // $zcrit_email = 'catherine@zcrit.com';
+    // $zcrit_pass = 'bc2143772000d1f6a475191b9f9642ab';
     function shortcode_zoom_call($atts)
     {   
         $zommmail_ext = $atts['zoommail'];
         $zommpass_ext = $atts['pass'];
         // print_r($zommpass_ext);
+        $current_user = wp_get_current_user();
+        $current_user_id = $current_user->ID;
+        add_user_meta( $current_user_id, 'zxzzoomactive_'.$current_user_id.'_user', $zommmail_ext, true);
+        add_user_meta( $current_user_id, 'zxzzoomactive_'.$current_user_id.'_user_pass', $zommpass_ext, true); 
         ob_start();
         html_zcrit_zoom_code($zommmail_ext,$zommpass_ext);
         return ob_get_clean();
@@ -171,7 +181,7 @@ function run_zcrit_zoom()
     add_shortcode('custom_zoom_shortcode', 'shortcode_zoom_call');
     // [remove_zoom_shortcode]
     function shortcode_zoom_remove()
-    {
+    {   
         ob_start();
         html_zcrit_zoom_remove();
         return ob_get_clean();
