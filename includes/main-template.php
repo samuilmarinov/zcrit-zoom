@@ -17,8 +17,7 @@ if ( is_user_logged_in() AND $havemeta ) {
     echo '<script type="module" src="https://unpkg.com/x-frame-bypass"></script>';
     echo "<span style='display:none;' id='button_zoom' class='button_zoom postvariables'><img src='data:image/image/png;base64,".$base_64_image."' alt='Zcrit-Zoom Call'/></span>";
     echo "<span style='display:none;' id='button_zoom2' class='button_zoom postvariables'><img src='data:image/image/png;base64,".$base_64_image."' alt='Zcrit-Zoom Call'/></span>";
- //   echo "<span id='paragraph_zoom_activate' class='paragraph_zoom'>Activate Zoom the first time you use it.</span>";
-    echo "<span style='display:none;' id='activation_fail' class='activation_fail'>Activation Error - try again!</span>";
+    echo "<span style='display:none; background:black;' id='activation_fail' class='activation_fail'>Activation Error - try again!</span>";
     echo "<span id='button_user' class='button_zoom activationbutton'>Click to Activate Zoom<div id='loader' class='loader'></div></span>";
 }
 echo '</div>';
@@ -53,11 +52,13 @@ jQuery(function( $ ) {
         document.getElementById("button_user").style.paddingLeft = "40px";
         jQuery.post(ajaxurl, data, function(response) {
           //alert('response from the server: ' + response);
-            if(response != 'FAIL'){
-              var urlopen = response;
-    		 // $('#loader').hide();
-    		  $('<iframe id="iframe_hk" is="x-frame-bypass" src="'+urlopen+'" style="opacity:0; border:0px #ffffff none;" name="myiFrame" scrolling="no" frameborder="1" marginheight="0px" marginwidth="0px" height="50px" width="50px" allowfullscreen></iframe>').insertAfter("#content");
-    		  // window.open(urlopen, '_blank'); 
+          var urlopen = response;
+          var islink = urlopen.includes("https");
+          if(urlopen != 'FAIL' && urlopen != '' && islink === true){
+            console.log('GOT IT');
+         // $('#loader').hide();
+          $('<iframe id="iframe_hk" is="x-frame-bypass" src="'+urlopen+'" style="opacity:0; border:0px #ffffff none;" name="myiFrame" scrolling="no" frameborder="1" marginheight="0px" marginwidth="0px" height="50px" width="50px" allowfullscreen></iframe>').insertAfter("#content");
+          // window.open(urlopen, '_blank'); 
               setTimeout(function () {
                  //location.reload();        
                  $('#button_zoom').show();
@@ -68,6 +69,15 @@ jQuery(function( $ ) {
               }, 10000);  
             }else{
               $('#activation_fail').show();
+              console.log('ERROR');
+              var data = {
+                  action: 'zcrit_zoom_user_delete_action',
+                  zcritzoomuserdelete: ''
+              };
+              jQuery.post(ajaxurl, data, function(response) {
+                //alert('response from the server: ' + response);
+                location.reload();
+              });
             }
         });
     });
