@@ -73,7 +73,7 @@ class Zcrit_Zoom_Public {
 		 * class.
 		 */
 
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/zcrit-zoom-public.css?v=4.9', array(), $this->version, 'all' );
+		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/zcrit-zoom-public.css?v=9.9.9', array(), $this->version, 'all' );
 
 	}
 

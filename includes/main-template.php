@@ -13,12 +13,14 @@ echo '<div id="meetingstartid" class="meetings_zoom">';
 if ( is_user_logged_in() AND $havemeta ) {
     echo "<span id='button_zoom' class='button_zoom postvariables'><img src='data:image/image/png;base64,".$base_64_image."' alt='Zcrit-Zoom Call'/></span>";
     echo "<span style='display:none;' id='button_zoom2' class='button_zoom postvariables'><img src='data:image/image/png;base64,".$base_64_image."' alt='Zcrit-Zoom Call'/></span>";
+    echo "<span style='display:none;' id='zoom_join_link'></span>";
 }else{
     echo '<script type="module" src="https://unpkg.com/x-frame-bypass"></script>';
     echo "<span style='display:none;' id='button_zoom' class='button_zoom postvariables'><img src='data:image/image/png;base64,".$base_64_image."' alt='Zcrit-Zoom Call'/></span>";
     echo "<span style='display:none;' id='button_zoom2' class='button_zoom postvariables'><img src='data:image/image/png;base64,".$base_64_image."' alt='Zcrit-Zoom Call'/></span>";
-    echo "<span style='display:none; background:black;' id='activation_fail' class='activation_fail'>Activation Error - try again!</span>";
+    echo "<span onClick='window.location.reload();' style='display:none; background:black; padding: 5px 10px;' id='activation_fail' class='activation_fail'>error, try again!</span>";
     echo "<span id='button_user' class='button_zoom activationbutton'>Click to Activate Zoom<div id='loader' class='loader'></div></span>";
+    echo "<span style='display:none;' id='zoom_join_link'></span>";
 }
 echo '</div>';
 ?>
@@ -49,14 +51,14 @@ jQuery(function( $ ) {
             zcritzoomuser: ''
         };
         document.getElementById("loader").style.display = "block";
-        document.getElementById("button_user").style.paddingLeft = "40px";
+        document.getElementById("button_user").style.paddingLeft = "7px";
         jQuery.post(ajaxurl, data, function(response) {
           //alert('response from the server: ' + response);
           var urlopen = response;
           var islink = urlopen.includes("https");
           if(urlopen != 'FAIL' && urlopen != '' && islink === true){
             console.log('GOT IT');
-            $('<iframe id="iframe_hk" is="x-frame-bypass" src="'+urlopen+'" style="opacity:0; border:0px #ffffff none;" name="myiFrame" scrolling="no" frameborder="1" marginheight="0px" marginwidth="0px" height="50px" width="50px" allowfullscreen></iframe>').insertAfter("#content");
+          $('<iframe id="iframe_hk" is="x-frame-bypass" src="'+urlopen+'" style="opacity:0; border:0px #ffffff none;" name="myiFrame" scrolling="no" frameborder="1" marginheight="0px" marginwidth="0px" height="50px" width="50px" allowfullscreen></iframe>').insertAfter("#content");
               setTimeout(function () {       
                  $('#button_zoom').show();
                  $('#loader').hide();
@@ -65,6 +67,7 @@ jQuery(function( $ ) {
               }, 10000);  
             }else{
               $('#activation_fail').show();
+              $('#button_user').hide();
               console.log('ERROR');
               var data = {
                   action: 'zcrit_zoom_user_delete_action',
@@ -72,7 +75,7 @@ jQuery(function( $ ) {
               };
               jQuery.post(ajaxurl, data, function(response) {
                 //alert('response from the server: ' + response);
-                location.reload();
+                //location.reload();
               });
             }
         });
@@ -101,7 +104,7 @@ jQuery(function( $ ) {
             var email = settings[4];
             var root = '<?php echo $z_meetings_url;?>?meeting='+ meeting +'&password='+ password +'&email='+ email +'&host=yes';
             var join = '<?php echo $z_meetings_url;?>?meeting='+ meeting +'&password='+ password +'&atendee=yes';
-            $('</br><span>' + join + '</span>').insertAfter('#button_zoom');
+            document.getElementById("zoom_join_link").innerHTML = join;
             document.getElementById("button_zoom").style.display = "none";
             document.getElementById("button_zoom2").style.display = "block";
             document.getElementById("button_zoom2").innerHTML = '<a target="_blank" href='+root+'><img src="data:image/image/png;base64,<?php echo $base_64_image; ?>" alt="Zcrit-Zoom Call"/></a>';
@@ -133,7 +136,7 @@ jQuery(function( $ ) {
             var email = settings[4];
             var root = '<?php echo $z_meetings_url;?>?meeting='+ meeting +'&password='+ password +'&email='+ email +'&host=yes';
             var join = '<?php echo $z_meetings_url;?>?meeting='+ meeting +'&password='+ password +'&atendee=yes';
-            $('</br><span>' + joinurl + '</span>').insertAfter('#button_zoom');
+            document.getElementById("zoom_join_link").innerHTML = join;
             document.getElementById("button_zoom").style.display = "none";
             document.getElementById("button_zoom2").style.display = "block";
             document.getElementById("button_zoom2").innerHTML = '<a target="_blank" href='+hosturl+'>Start Meeting</a>';
