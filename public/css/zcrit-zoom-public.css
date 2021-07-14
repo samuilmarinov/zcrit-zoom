@@ -27,6 +27,15 @@
 #button_zoom2{
     filter: invert(1);
 }
+#button_zoom2::after {
+    content: " - click to start meeting";
+    display: flex;
+    width: 200px;
+    top: -2rem;
+    left: 2rem;
+    position: relative;
+    font-size: 0.85rem;
+}
  .button_zoom {
     position: relative;
     top: 0;

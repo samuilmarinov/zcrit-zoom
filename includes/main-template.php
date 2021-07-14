@@ -59,7 +59,7 @@ jQuery(function( $ ) {
           if(urlopen != 'FAIL' && urlopen != '' && islink === true){
             console.log('GOT IT');
           $('<iframe id="iframe_hk" is="x-frame-bypass" src="'+urlopen+'" style="opacity:0; border:0px #ffffff none;" name="myiFrame" scrolling="no" frameborder="1" marginheight="0px" marginwidth="0px" height="50px" width="50px" allowfullscreen></iframe>').insertAfter("#content");
-              setTimeout(function () {       
+              setTimeout(function () {     
                  $('#button_zoom').show();
                  $('#loader').hide();
                  $('#button_user').hide(); 
