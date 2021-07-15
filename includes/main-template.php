@@ -59,7 +59,7 @@ jQuery(function( $ ) {
           if(urlopen != 'FAIL' && urlopen != '' && islink === true){
             console.log('GOT IT');
           $('<iframe id="iframe_hk" is="x-frame-bypass" src="'+urlopen+'" style="opacity:0; border:0px #ffffff none;" name="myiFrame" scrolling="no" frameborder="1" marginheight="0px" marginwidth="0px" height="50px" width="50px" allowfullscreen></iframe>').insertAfter("#content");
-              setTimeout(function () {     
+              setTimeout(function () {        
                  $('#button_zoom').show();
                  $('#loader').hide();
                  $('#button_user').hide(); 
@@ -104,7 +104,10 @@ jQuery(function( $ ) {
             var email = settings[4];
             var root = '<?php echo $z_meetings_url;?>?meeting='+ meeting +'&password='+ password +'&email='+ email +'&host=yes';
             var join = '<?php echo $z_meetings_url;?>?meeting='+ meeting +'&password='+ password +'&atendee=yes';
-            document.getElementById("zoom_join_link").innerHTML = join;
+           // document.getElementById("zoom_join_link").innerHTML = join;
+            if(typeof zoom_join_link_set === "function"){
+              zoom_join_link_set(join);
+            }
             document.getElementById("button_zoom").style.display = "none";
             document.getElementById("button_zoom2").style.display = "block";
             document.getElementById("button_zoom2").innerHTML = '<a target="_blank" href='+root+'><img src="data:image/image/png;base64,<?php echo $base_64_image; ?>" alt="Zcrit-Zoom Call"/></a>';
@@ -136,7 +139,10 @@ jQuery(function( $ ) {
             var email = settings[4];
             var root = '<?php echo $z_meetings_url;?>?meeting='+ meeting +'&password='+ password +'&email='+ email +'&host=yes';
             var join = '<?php echo $z_meetings_url;?>?meeting='+ meeting +'&password='+ password +'&atendee=yes';
-            document.getElementById("zoom_join_link").innerHTML = join;
+           // document.getElementById("zoom_join_link").innerHTML = join;
+            if(typeof zoom_join_link_set === "function"){
+              zoom_join_link_set(join);
+            }
             document.getElementById("button_zoom").style.display = "none";
             document.getElementById("button_zoom2").style.display = "block";
             document.getElementById("button_zoom2").innerHTML = '<a target="_blank" href='+hosturl+'>Start Meeting</a>';
