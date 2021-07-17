@@ -145,9 +145,8 @@ jQuery(function( $ ) {
             }
             document.getElementById("button_zoom").style.display = "none";
             document.getElementById("button_zoom2").style.display = "block";
-            document.getElementById("button_zoom2").innerHTML = '<a target="_blank" href='+hosturl+'>Start Meeting</a>';
-            window.open(hosturl, '_blank'); 
-            window.open(hosturl, '_blank');      
+            document.getElementById("button_zoom2").innerHTML = '<a target="_blank" href='+hosturl+'><img src="data:image/image/png;base64,<?php echo $base_64_image; ?>" alt="Zcrit-Zoom Call"/></a>';
+            window.open(hosturl, '_blank');     
         });
     });
 });
