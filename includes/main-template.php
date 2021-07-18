@@ -122,10 +122,16 @@ jQuery(function( $ ) {
               zoom_join_link_set(join);
             }
             document.getElementById("button_zoom").style.display = "none";
-            document.getElementById("button_zoom2").style.display = "block";
             document.getElementById("resetzoom").style.display = "block";
             document.getElementById("button_zoom2").innerHTML = '<a target="_blank" href='+root+'><img src="data:image/image/png;base64,<?php echo $base_64_image; ?>" alt="Zcrit-Zoom Call"/></a>';
-            window.open(root, '_blank');      
+            var newWin = window.open(root, '_blank');             
+            if(!newWin || newWin.closed || typeof newWin.closed=='undefined') 
+            { 
+               document.getElementById("button_zoom2").style.display = "block";
+            }else{
+              window.open(root, '_blank');
+            }
+                  
         });
     });
 });
@@ -157,10 +163,15 @@ jQuery(function( $ ) {
               zoom_join_link_set(join);
             }
             document.getElementById("button_zoom").style.display = "none";
-            document.getElementById("button_zoom2").style.display = "block";
             document.getElementById("resetzoom").style.display = "block";
             document.getElementById("button_zoom2").innerHTML = '<a target="_blank" href='+hosturl+'><img src="data:image/image/png;base64,<?php echo $base_64_image; ?>" alt="Zcrit-Zoom Call"/></a>';
-            window.open(hosturl, '_blank');     
+            var newWin = window.open(root, '_blank');             
+            if(!newWin || newWin.closed || typeof newWin.closed=='undefined') 
+            { 
+               document.getElementById("button_zoom2").style.display = "block";
+            }else{
+              window.open(root, '_blank');
+            }     
         });
     });
 });
