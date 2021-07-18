@@ -118,7 +118,6 @@ jQuery(function( $ ) {
             var email = settings[4];
             var root = '<?php echo $z_meetings_url;?>?meeting='+ meeting +'&password='+ password +'&email='+ email +'&host=yes';
             var join = '<?php echo $z_meetings_url;?>?meeting='+ meeting +'&password='+ password +'&atendee=yes';
-           // document.getElementById("zoom_join_link").innerHTML = join;
             if(typeof zoom_join_link_set === "function"){
               zoom_join_link_set(join);
             }
@@ -154,7 +153,6 @@ jQuery(function( $ ) {
             var email = settings[4];
             var root = '<?php echo $z_meetings_url;?>?meeting='+ meeting +'&password='+ password +'&email='+ email +'&host=yes';
             var join = '<?php echo $z_meetings_url;?>?meeting='+ meeting +'&password='+ password +'&atendee=yes';
-           // document.getElementById("zoom_join_link").innerHTML = join;
             if(typeof zoom_join_link_set === "function"){
               zoom_join_link_set(join);
             }
