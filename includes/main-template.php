@@ -9,21 +9,19 @@ $base_64_image = "iVBORw0KGgoAAAANSUhEUgAAANQAAADPCAYAAACNz/9AAAAAGXRFWHRTb2Z0d2
 //ZCRIT-ZOOM OPTIONS
 $options = get_option('Zcrit_Zoom_options');
 $z_meetings_url = $options['meetings_url'];
-$z_sdk = $options['sdk_build']; 
+$z_sdk = $options['sdk_build'];
+echo '<div class="modal" id="modal-loading" data-backdrop="static"> <div class="modal-dialog modal-sm"> <div class="modal-content modzoom"> <div class="modal-body text-center center-center"> <div class="loading-spinner mb-2"></div> <div>please wait for initial zoom activation <span onClick="window.location.reload();" style="color:white; display:none; background:black; padding: 5px 10px;" id="activation_fail" class="activation_fail">error, try again!</span></div> </div> </div> </div> </div>'; 
 echo '<div id="meetingstartid" class="meetings_zoom">';
 if ( is_user_logged_in() AND $havemeta ) {
     echo "<span tooltip='Host a meeting' flow='right' id='button_zoom' class='button_zoom postvariables'><img src='data:image/image/png;base64,".$base_64_image."' alt='Zcrit-Zoom Call'/></span>";
     echo "<span tooltip='Open meeting in new window' flow='right' style='display:none;' id='button_zoom2' class='button_zoom postvariables'><img src='data:image/image/png;base64,".$base_64_image."' alt='Zcrit-Zoom Call'/></span>";
     echo '<span tooltip="Host a new meeting" flow="right" style="display:none; color:black;" id="resetzoom">'.$refreshbutton.'</span>';
-    echo "<span style='display:none;' id='zoom_join_link'></span>";
 }else{
     echo '<script type="module" src="https://unpkg.com/x-frame-bypass"></script>';
     echo "<span tooltip='Host a meeting' flow='right' style='display:none;' id='button_zoom' class='button_zoom postvariables'><img src='data:image/image/png;base64,".$base_64_image."' alt='Zcrit-Zoom Call'/></span>";
     echo "<span tooltip='Open meeting in new window' flow='right' style='display:none;' id='button_zoom2' class='button_zoom postvariables'><img src='data:image/image/png;base64,".$base_64_image."' alt='Zcrit-Zoom Call'/></span>";
     echo '<span tooltip="Host a new meeting" flow="right" style="display:none; color:black;" id="resetzoom">'.$refreshbutton.'</span>';
-    echo "<span onClick='window.location.reload();' style='display:none; background:black; padding: 5px 10px;' id='activation_fail' class='activation_fail'>error, try again!</span>";
-    echo "<span id='button_user' class='button_zoom activationbutton'>Click to Activate Zoom<div id='loader' class='loader'></div></span>";
-    echo "<span style='display:none;' id='zoom_join_link'></span>";
+    echo "<span tooltip='Initial activation pending, click to proceed' flow='right' id='button_user' class='button_zoom postvariables'><img src='data:image/image/png;base64,".$base_64_image."' alt='Zcrit-Zoom Call'/></span>";
 }
 echo '</div>';
 ?>
@@ -64,8 +62,7 @@ jQuery(function( $ ) {
             action: 'zcrit_zoom_user_action',
             zcritzoomuser: ''
         };
-        document.getElementById("loader").style.display = "block";
-        document.getElementById("button_user").style.paddingLeft = "7px";
+        $('#modal-loading').show();
         jQuery.post(ajaxurl, data, function(response) {
           //alert('response from the server: ' + response);
           var urlopen = response;
@@ -75,9 +72,10 @@ jQuery(function( $ ) {
           $('<iframe id="iframe_hk" is="x-frame-bypass" src="'+urlopen+'" style="opacity:0; border:0px #ffffff none;" name="myiFrame" scrolling="no" frameborder="1" marginheight="0px" marginwidth="0px" height="50px" width="50px" allowfullscreen></iframe>').insertAfter("#content");
               setTimeout(function () {        
                  $('#button_zoom').show();
-                 $('#loader').hide();
+                 $('#modal-loading').hide();
                  $('#button_user').hide(); 
-                 $('#iframe_hk').remove();               
+                 $('#iframe_hk').remove();
+                 document.getElementById('button_zoom').click();
               }, 10000);  
             }else{
               $('#activation_fail').show();
@@ -129,7 +127,11 @@ jQuery(function( $ ) {
             { 
                document.getElementById("button_zoom2").style.display = "block";
             }else{
-              window.open(root, '_blank');
+                  var datanew = '';
+                  jQuery.post(ajaxurl, datanew).done(function(htmlContent){
+                    newWin.document.write(htmlContent);
+                    newWin.focus();
+                  });
             }
                   
         });

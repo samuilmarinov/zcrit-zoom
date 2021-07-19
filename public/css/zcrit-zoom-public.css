@@ -16,26 +16,36 @@
 .activationbutton{
     background-color:#ef0808 !important;
 }
-#button_user{
-    display: flex;
-    width: 180px !important;
-    max-width: 180px !important;
-    padding-top: 2px;
-    padding-left: 20px;
-    font-size: 0.85rem;
-}
 #button_zoom2{
     filter: invert(1);
 }
-/*#button_zoom2::after {
-    content: " - click to start meeting";
-    display: flex;
-    width: 200px;
-    top: -2rem;
-    left: 2rem;
-    position: relative;
-    font-size: 0.85rem;
-}*/
+.center-center{
+  text-align:center;
+}
+.modzoom{
+  background-color:white !important;
+  border-radius: 25px;
+  font-size: 1.35rem;
+  box-shadow: 1px 1px 6px #757575;
+  border: 0 !important;
+}
+.loading-spinner{
+  width:30px;
+  height:30px;
+  border:2px solid indigo;
+  border-radius:50%;
+  border-top-color:#0001;
+  display:inline-block;
+  animation:loadingspinner .7s linear infinite;
+}
+@keyframes loadingspinner{
+  0%{
+    transform:rotate(0deg)
+  }
+  100%{
+    transform:rotate(360deg)
+  }
+}
 
 .button_zoom:hover + #resetzoom {
   display: none !important;
