@@ -126,12 +126,8 @@ jQuery(function( $ ) {
             if(!newWin || newWin.closed || typeof newWin.closed=='undefined') 
             { 
                document.getElementById("button_zoom2").style.display = "block";
-            }else{
-                  var datanew = '';
-                  jQuery.post(ajaxurl, datanew).done(function(htmlContent){
-                    newWin.document.write(htmlContent);
-                    newWin.focus();
-                  });
+            }else{  
+              window.open(root, '_blank');
             }
                   
         });
