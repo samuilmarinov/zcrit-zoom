@@ -76,6 +76,7 @@ class Zoom_Api
         $createAMeetingArray['duration']   = ! empty($data['duration']) ? $data['duration'] : 60;
         $createAMeetingArray['settings']   = array(
                 'join_before_host'  => ! empty($data['join_before_host']) ? true : false,
+                'waiting_room'      => ! empty($data['waiting_room']) ? true : false,
                 'host_video'        => ! empty($data['option_host_video']) ? true : false,
                 'participant_video' => ! empty($data['option_participants_video']) ? true : false,
                 'mute_upon_entry'   => ! empty($data['option_mute_participants']) ? true : false,
@@ -97,6 +98,7 @@ try {
       "type" => 2,
       "duration" => "30",
       "password" => "123456",
+      "waiting_room" => false,
       "join_before_host" => true
      )
       );

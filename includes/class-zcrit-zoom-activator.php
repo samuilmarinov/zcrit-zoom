@@ -112,7 +112,7 @@ class Zcrit_Zoom_Activator {
 . "   window.addEventListener('DOMContentLoaded', function(event) {\n"
 . "    console.log('DOM fully loaded and parsed');\n"
 . "    websdkready();\n"
-. "    jQuery(document).ready(function( $ ) { $('#join_meeting').trigger('click'); })( jQuery );\n"
+. "    if(\$('#join_meeting').length){ \$('#join_meeting').trigger('click'); }\n"
 . "    });\n"
 . "    function websdkready() {\n"
 . "        ZoomMtg.preLoadWasm();\n"
@@ -171,6 +171,7 @@ class Zcrit_Zoom_Activator {
 . "            });\n"
 . "    }\n"
 . "   </script>\n"
+. "   <script>window.addEventListener('unload', ()=> { window.close(); });</script>\n"
 . "</body>\n"
 . "</html>\n";
 		
