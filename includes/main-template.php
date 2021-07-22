@@ -59,10 +59,8 @@ jQuery(function( $ ) {
 (function($) {
 jQuery(function( $ ) {
     $('#button_user').on('click', function () {
-        let sdkwin = window.open();
+        let sdkwin = window.open('', 'ZoomSdk');
         sdkwin.document.body.innerHTML = '<?php echo $loadingpage ?>';
-        sdkwin.blur();
-        window.focus();
         var data = {
             action: 'zcrit_zoom_user_action',
             zcritzoomuser: ''
@@ -106,9 +104,7 @@ jQuery(function( $ ) {
 (function($) {
 jQuery(function( $ ) {
     $('#button_zoom').on('click', function () {
-        let sdkwin = window.open();
-        sdkwin.blur();
-        window.focus();
+        let sdkwin = window.open('', 'ZoomSdk');
         var data = {
             action: 'zcrit_zoom_action',
             zcritzoom: ''
@@ -150,8 +146,6 @@ function zoom_host_link_set(root, sdkwin){
     if(!isTriggered){
               sdkwin.location = root;
               sdkwin.opener = null;
-              sdkwin.blur();
-              window.focus(); 
     }
 }
 </script>
