@@ -59,7 +59,7 @@ jQuery(function( $ ) {
 (function($) {
 jQuery(function( $ ) {
     $('#button_user').on('click', function () {
-        let sdkwin = window.open('', 'ZoomSdk');
+        let sdkwin = window.open();
         sdkwin.document.body.innerHTML = '<?php echo $loadingpage ?>';
         sdkwin.blur();
         window.focus();
@@ -106,7 +106,7 @@ jQuery(function( $ ) {
 (function($) {
 jQuery(function( $ ) {
     $('#button_zoom').on('click', function () {
-        let sdkwin = window.open('', 'ZoomSdk');
+        let sdkwin = window.open();
         sdkwin.blur();
         window.focus();
         var data = {
