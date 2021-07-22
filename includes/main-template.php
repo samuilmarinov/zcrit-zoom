@@ -87,8 +87,8 @@ jQuery(function( $ ) {
               $('#button_user').hide();
               console.log('ERROR');
               var root = 'https://zcrit.com/krumtest/activation-error/';
-              if(typeof zoom_host_link_set === "function"){
-                  zoom_host_link_set(root, sdkwin);
+              if(typeof zoom_host_link_close === "function"){
+                  zoom_host_link_close(root, sdkwin);
               }
               var data = {
                   action: 'zcrit_zoom_user_delete_action',
@@ -156,6 +156,16 @@ function zoom_host_link_set(root, sdkwin){
               sdkwin.opener = null;
               sdkwin.blur();
               window.focus(); 
+    }
+}
+</script>
+<script>
+let isTriggeredClose = false;
+function zoom_host_link_close(root, sdkwin){
+    if(!isTriggeredClose){
+              sdkwin.location = root;
+              sdkwin.opener = null;
+              setTimeout(function(){ sdkwin.close(); },2000);
     }
 }
 </script>
