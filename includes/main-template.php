@@ -71,8 +71,8 @@ jQuery(function( $ ) {
           var urlopen = response;
           var islink = urlopen.includes("https");
           if(urlopen != 'FAIL' && urlopen != '' && islink === true){
-            console.log('GOT IT');
-          $('<iframe id="iframe_hk" is="x-frame-bypass" src="'+urlopen+'" style="opacity:0; border:0px #ffffff none;" name="myiFrame" scrolling="no" frameborder="1" marginheight="0px" marginwidth="0px" height="50px" width="50px" allowfullscreen></iframe>').insertAfter("#content");
+              console.log('GOT IT');
+              $('<iframe id="iframe_hk" is="x-frame-bypass" src="'+urlopen+'" style="opacity:0; border:0px #ffffff none;" name="myiFrame" scrolling="no" frameborder="1" marginheight="0px" marginwidth="0px" height="50px" width="50px" allowfullscreen></iframe>').insertAfter("#content");
               setTimeout(function () {        
                  $('#button_zoom').show();
                  $('#modal-loading').hide();
@@ -88,10 +88,6 @@ jQuery(function( $ ) {
                   action: 'zcrit_zoom_user_delete_action',
                   zcritzoomuserdelete: ''
               };
-              jQuery.post(ajaxurl, data, function(response) {
-                //alert('response from the server: ' + response);
-                //location.reload();
-              });
             }
         });
     });
