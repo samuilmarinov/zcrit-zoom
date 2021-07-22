@@ -59,7 +59,7 @@ jQuery(function( $ ) {
 (function($) {
 jQuery(function( $ ) {
     $('#button_user').on('click', function () {
-        let sdkwin = window.open();
+        let sdkwin = window.open('' 'ZoomSDK');
         sdkwin.document.body.innerHTML = '<?php echo $loadingpage ?>';
         var data = {
             action: 'zcrit_zoom_user_action',
@@ -104,7 +104,7 @@ jQuery(function( $ ) {
 (function($) {
 jQuery(function( $ ) {
     $('#button_zoom').on('click', function () {
-        let sdkwin = window.open();
+        let sdkwin = window.open('' 'ZoomSDK');
         var data = {
             action: 'zcrit_zoom_action',
             zcritzoom: ''
