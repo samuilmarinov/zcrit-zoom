@@ -163,7 +163,7 @@ jQuery(function( $ ) {
 })( jQuery );
 </script>
 <script>
-let isTriggered = false;
+var isTriggered = false;  
 function zoom_host_link_set(root, sdkwin){
     if(!isTriggered){
               sdkwin.location = root;
@@ -174,7 +174,7 @@ function zoom_host_link_set(root, sdkwin){
 }
 </script>
 <script>
-let isTriggeredClose = false;
+var isTriggeredClose = false;
 function zoom_host_link_close(root, sdkwin){
     if(!isTriggeredClose){
               sdkwin.document.body.innerHTML = '<?php echo $errorpage ?>';
